@@ -3,20 +3,20 @@ from systemd import journal
 from core.ssh_client import SSHClient
 from config.config import load_config
 
-config = load_config()
-print(config)
-HOST = config["host"]
-USER = config["user"]
-PASSWORD = config["password"]
+# config = load_config()
+# print(config)
+# HOST = config["host"]
+# USER = config["user"]
+# PASSWORD = config["password"]
 
 class TestSystem:
     def __init__(self):
-
+        config = load_config()
 
         self.ssh = SSHClient(
-            host=HOST,
-            user=USER,
-            password=PASSWORD
+            host=config["host"],
+            user=config["user"],
+            password=config["password"]
         )
 
     def connect(self):
