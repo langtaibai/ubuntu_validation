@@ -1,7 +1,7 @@
-from core.ssh_client import SSHClient
-from config.config import load_config
-
-class BootTest:
+#from core.ssh_client import SSHClient
+#from config.config import load_config
+from tests.base import BaseTest
+class BootTest(BaseTest):
     def __init__(self,ssh):
         # config = load_config()
         # self.ssh = SSHClient(
