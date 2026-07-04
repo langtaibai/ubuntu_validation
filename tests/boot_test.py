@@ -2,21 +2,21 @@ from core.ssh_client import SSHClient
 from config.config import load_config
 
 class BootTest:
-    def __init__(self):
-        config = load_config()
-        self.ssh = SSHClient(
-            host=config["host"],
-            user=config["user"],
-            password=config["password"]
-        )
-
-    def connect(self):
-        """connect test machine"""
-        self.ssh.connect()
-
-    def disconnect(self):
-        """disconnect test machine"""
-        self.ssh.close()
+    def __init__(self,ssh):
+        # config = load_config()
+        # self.ssh = SSHClient(
+        #     host=config["host"],
+        #     user=config["user"],
+        #     password=config["password"]
+        # )
+        self.ssh = ssh
+    # def connect(self):
+    #     """connect test machine"""
+    #     self.ssh.connect()
+    #
+    # def disconnect(self):
+    #     """disconnect test machine"""
+    #     self.ssh.close()
 
     def run(self):
         result = self.ssh.run(

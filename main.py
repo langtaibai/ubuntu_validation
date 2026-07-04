@@ -1,16 +1,32 @@
+from unittest import result
+
 from tests.boot_test import BootTest
 #from tests.test_system import TestSystem
+from core.ssh_client import SSHClient
+from config.config import load_config
 
-def main():
-    # tester = TestSystem()
-    # tester.connect()
-    # tester.check_system_status()
-    # tester.collect_journal()
-    # tester.disconnect
-    boot = BootTest()
-    boot.connect()
-    result= boot.run()
-    boot.disconnect()
-    print(result)
-if __name__ == "__main__":
-    main()
+config = load_config()
+ssh = SSHClient(
+    host=config["host"],
+    user=config["user"],
+    password=config["password"]
+)
+ssh.connect()
+boot = BootTest(ssh)
+result = boot.run()
+print(result)
+ssh.close()
+
+# def main():
+#     # tester = TestSystem()
+#     # tester.connect()
+#     # tester.check_system_status()
+#     # tester.collect_journal()
+#     # tester.disconnect
+#     boot = BootTest()
+#     boot.connect()
+#     result= boot.run()
+#     boot.disconnect()
+#     print(result)
+# if __name__ == "__main__":
+#     main()
