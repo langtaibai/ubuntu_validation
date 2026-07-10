@@ -1,12 +1,14 @@
 Flow chart:
-    文件系统
-       |
-    python module import
-       |
-    inspect class
-       |
-    筛选 Test
-       |
-    自动实例化
-       |
-    加入 runner
+    扫描 tests 文件夹
+        ↓
+    找到 boot_test.py / service_test.py
+        ↓
+    import 进来
+        ↓
+    找到里面的 class
+        ↓
+    筛选 class 名字以 Test 结尾
+        ↓
+    自动实例化 BootTest(ssh)
+        ↓
+    加到 runner.tests
