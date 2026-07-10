@@ -1,0 +1,12 @@
+Flow chart:
+    文件系统
+       |
+    python module import
+       |
+    inspect class
+       |
+    筛选 Test
+       |
+    自动实例化
+       |
+    加入 runner

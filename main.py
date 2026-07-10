@@ -1,10 +1,10 @@
 from unittest import result
 
-from tests.boot_test import BootTest
+from uvf.tests.boot_test import BootTest
 #from tests.test_system import TestSystem
-from core.ssh_client import SSHClient
-from config.config import load_config
-from core.test_runner import TestRunner
+from uvf.core.ssh_client import SSHClient
+from uvf.config.config import load_config
+from uvf.core.test_runner import TestRunner
 # config = load_config()
 # ssh = SSHClient(
 #     host=config["host"],
@@ -41,9 +41,11 @@ def main():
     ssh.connect()
 
     #create runner
-    runner = TestRunner()
+    runner = TestRunner(ssh)
     #add test
-    runner.add_test(BootTest(ssh))
+    #runner.add_test(BootTest(ssh))
+    #discovery test case
+    runner.auto_discovery()
     #run test
     results = runner.run_all()
     print("\n Final results:")
