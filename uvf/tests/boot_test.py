@@ -3,7 +3,7 @@
 from tests.base import BaseTest
 class BootTest(BaseTest):
 
-    TAGS = ["BootTest"]
+    TAGS = ["boot"]
     def __init__(self,ssh):
         # config = load_config()
         # self.ssh = SSHClient(

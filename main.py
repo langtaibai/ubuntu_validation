@@ -47,9 +47,13 @@ def main():
     #discovery test case
     runner.auto_discovery()
     #run test
-    results = runner.run_all()
+    print(type(runner.select_tests))
+    print(runner.select_tests)
+    runner.select_tests("boot")
+    runner.run_all()
+    #results = runner.run_all()
     print("\n Final results:")
-    print(results)
+    #print(results)
 
     ssh.close()
 

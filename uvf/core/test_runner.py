@@ -8,6 +8,7 @@ class TestRunner:
     def __init__(self, ssh):
         self.tests = []
         self.results = []
+        self.selected_tests = []
         self.ssh = ssh
 
     # def add_test(self,test):
@@ -36,12 +37,24 @@ class TestRunner:
                         instance = obj(self.ssh)
                         self.tests.append(instance)
 
+    def select_tests(self, tag=None):
+        if tag is None:
+            self.selected_tests = self.tests.copy()
+            return
+        self.selected_tests = []
+        for test in self.tests:
+            if tag in test.TAGS:
+                self.selected_tests.append(test)
+
+
     def run_all(self):
         """
         :return:
         """
         print("\n====== UVF TEST RUNNER START ======\n")
-        for test in self.tests:
+        print(self.selected_tests)
+        print(self.select_tests)
+        for test in self.selected_tests:
             print(test.__class__.__name__)
             print(test.TAGS)
             result = test.run()
