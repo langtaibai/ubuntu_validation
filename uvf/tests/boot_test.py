@@ -1,6 +1,6 @@
 #from core.ssh_client import SSHClient
 #from config.config import load_config
-from tests.base import BaseTest
+from uvf.tests.base import BaseTest
 class BootTest(BaseTest):
 
     TAGS = ["boot"]
