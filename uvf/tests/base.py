@@ -1,8 +1,14 @@
-class BaseTest:
+from abc import ABC, abstractmethod
+
+class BaseTest(ABC):
     """
-    Base class for tests
+    All tests should inherit from this class
     """
+    TAGS = []
+
     def __init__(self, ssh):
         self.ssh = ssh
+
+    @abstractmethod
     def run(self):
-        raise NotImplementedError("Test must implement run()")
+        pass

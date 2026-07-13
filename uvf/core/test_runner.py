@@ -42,6 +42,8 @@ class TestRunner:
         """
         print("\n====== UVF TEST RUNNER START ======\n")
         for test in self.tests:
+            print(test.__class__.__name__)
+            print(test.TAGS)
             result = test.run()
             self.results.append(result)
 

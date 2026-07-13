@@ -2,10 +2,12 @@
 #from config.config import load_config
 from tests.base import BaseTest
 class BootTest(BaseTest):
+
+    TAGS = ["BootTest"]
     def __init__(self,ssh):
         # config = load_config()
         # self.ssh = SSHClient(
-        #     host=config["host"],
+        #     host=con fig["host"],
         #     user=config["user"],
         #     password=config["password"]
         # )
