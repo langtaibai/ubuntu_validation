@@ -11,4 +11,7 @@ class BaseTest(ABC):
 
     @abstractmethod
     def run(self):
+        """
+        return TestResult
+        """
         pass

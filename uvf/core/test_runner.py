@@ -60,7 +60,13 @@ class TestRunner:
             result = test.run()
             self.results.append(result)
 
-            print(f"[{ result['name']}] {result['result']} - {result['message']}")
+        #    print(f"[{ result['name']}] {result['result']} - {result['message']}")
+        for result in self.results:
+            print(
+                f"[{result.status}]  "
+                f"{result.name}   "
+                f"{result.duration:.2f}s"
+            )
 
         print("\n====== UVF TEST RUNNER END ======\n")
 

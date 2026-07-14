@@ -1,6 +1,9 @@
 #from core.ssh_client import SSHClient
 #from config.config import load_config
+import time
 from uvf.tests.base import BaseTest
+from uvf.core.test_result import TestResult
+
 class BootTest(BaseTest):
 
     TAGS = ["boot"]
@@ -21,25 +24,24 @@ class BootTest(BaseTest):
     #     self.ssh.close()
 
     def run(self):
+        start = time.time()
         result = self.ssh.run(
             "systemctl is-system-running"
         )
+        duration = time.time() - start
         status = result["stdout"].strip()
-        if status == "running":
-            return {
-                "name": "Boot Test",
-                "result": "PASS",
-                "message": "System is running"
-            }
-        elif status == "degraded":
-            return {
-                "name": "Boot Test",
-                "result": "WARNING",
-                "message": "System is degraded"
-            }
+        if status in ["running", "degraded"]:
+            return TestResult(
+                name=self.__class__.__name__,
+                status="PASS",
+                duration=duration,
+                message=status
+
+            )
         else:
-            return {
-                "name": "Boot Test",
-                "result": "FAIL",
-                "message": "System is not running"
-            }
+            return  TestResult(
+                name=self.__class__.__name__,
+                status="FAIL",
+                duration=duration,
+                message=status
+            )
