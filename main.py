@@ -70,13 +70,13 @@ def main():
             print(f"  {tag}")
         exit(0)
     #run test
-    print(type(runner.select_tests))
-    print(runner.select_tests)
+    #print(type(runner.select_tests))
+    #print(runner.select_tests) 
     #runner.select_tests("boot")
     runner.select_tests(args.tag)
     runner.run_all()
     #results = runner.run_all()
-    print("\n Final results:")
+    # print("\n Final results:")
     #print(results)
 
     ssh.close()
