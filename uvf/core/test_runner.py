@@ -1,15 +1,21 @@
 import importlib
 import pkgutil
+import time
+
 import uvf.tests
 import inspect
-
+from core.test_result import TestResult
+from core.test_session import TestSession
 from reporters.json_reporter import JsonReporter
 from reporters.terminal_reporter import TerminalReporter
+from core.status import Teststatus
+
 class TestRunner:
 
     def __init__(self, ssh):
         self.tests = []
-        self.results = []
+        #self.results = []
+        self.session = TestSession()
         self.selected_tests = []
         self.ssh = ssh
 
@@ -48,11 +54,30 @@ class TestRunner:
             if tag in test.TAGS:
                 self.selected_tests.append(test)
 
+    def _summary(self):
+        self.session.total = len(self.session.results)
+        self.session.passed = sum(
+            1
+            for r in self.session.results
+            if r.status == Teststatus.PASS
+        )
+        self.session.failed = sum(
+            1
+            for r in self.session.results
+            if r.status == Teststatus.FAIL
+        )
+        self.session.skipped = sum(
+            1
+            for r in self.session.results
+            if r.status == Teststatus.SKIP
+        )
+
 
     def run_all(self):
         """
         :return:
         """
+        self.session.start_time = time.time()
         print("\n====== UVF TEST RUNNER START ======\n")
         # print(self.selected_tests)
         # print(self.select_tests)
@@ -60,8 +85,13 @@ class TestRunner:
             # print(test.__class__.__name__)
             # print(test.TAGS)
             result = test.run()
-            self.results.append(result)
-
+            #self.results.append(result)
+            self.session.results.append(result)
+        self.session.end_time = time.time()
+        self.session.duration = (
+            self.session.end_time - self.session.start_time
+        )
+        self._summary()
         #    print(f"[{ result['name']}] {result['result']} - {result['message']}")
         # for result in self.results:
         #     print(
@@ -69,9 +99,7 @@ class TestRunner:
         #         f"{result.name}   "
         #         f"{result.duration:.2f}s"
         #     )
-        reporter = TerminalReporter()
-        #reporter = JsonReporter()
-        reporter.generate(self.results)
+        #reporter = TerminalReporter()
+        reporter = JsonReporter()
+        reporter.generate(self.session)
         print("\n====== UVF TEST RUNNER END ======\n")
-
-        return self.results

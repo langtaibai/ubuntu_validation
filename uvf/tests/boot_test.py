@@ -1,6 +1,8 @@
 #from core.ssh_client import SSHClient
 #from config.config import load_config
 import time
+
+from core.status import Teststatus
 from uvf.tests.base import BaseTest
 from uvf.core.test_result import TestResult
 
@@ -33,7 +35,7 @@ class BootTest(BaseTest):
         if status in ["running", "degraded"]:
             return TestResult(
                 name=self.__class__.__name__,
-                status="PASS",
+                status=Teststatus.PASS,
                 duration=duration,
                 message=status
 
@@ -41,7 +43,7 @@ class BootTest(BaseTest):
         else:
             return  TestResult(
                 name=self.__class__.__name__,
-                status="FAIL",
+                status=Teststatus.FAIL,
                 duration=duration,
                 message=status
             )
