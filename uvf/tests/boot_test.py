@@ -16,7 +16,8 @@ class BootTest(BaseTest):
         #     user=config["user"],
         #     password=config["password"]
         # )
-        self.ssh = ssh
+        super().__init__(ssh)
+        #self.ssh = ssh
     # def connect(self):
     #     """connect test machine"""
     #     self.ssh.connect()
@@ -26,9 +27,16 @@ class BootTest(BaseTest):
     #     self.ssh.close()
 
     def run(self):
+        self.logger.info("start boot test")
         start = time.time()
         result = self.ssh.run(
             "systemctl is-system-running"
+        )
+        self.logger.info(
+            f"stdout={result['stdout']}"
+        )
+        self.logger.info(
+            f"exit={result['exit_code']}"
         )
         duration = time.time() - start
         status = result["stdout"].strip()
@@ -47,3 +55,5 @@ class BootTest(BaseTest):
                 duration=duration,
                 message=status
             )
+
+
