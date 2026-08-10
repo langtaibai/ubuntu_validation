@@ -9,6 +9,7 @@ from core.test_session import TestSession
 from reporters.json_reporter import JsonReporter
 from reporters.terminal_reporter import TerminalReporter
 from core.status import Teststatus
+from core.executor import TestExecutor
 
 class TestRunner:
 
@@ -81,10 +82,13 @@ class TestRunner:
         print("\n====== UVF TEST RUNNER START ======\n")
         # print(self.selected_tests)
         # print(self.select_tests)
+
+        executor = TestExecutor(retry=2)
         for test in self.selected_tests:
             # print(test.__class__.__name__)
             # print(test.TAGS)
-            result = test.run()
+            #result = test.run()
+            result = executor.execute(test)
             #self.results.append(result)
             self.session.results.append(result)
         self.session.end_time = time.time()
