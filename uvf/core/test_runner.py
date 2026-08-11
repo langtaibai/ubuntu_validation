@@ -4,12 +4,12 @@ import time
 
 import uvf.tests
 import inspect
-from core.test_result import TestResult
-from core.test_session import TestSession
-from reporters.json_reporter import JsonReporter
-from reporters.terminal_reporter import TerminalReporter
-from core.status import Teststatus
-from core.executor import TestExecutor
+from uvf.core.test_result import TestResult
+from uvf.core.test_session import TestSession
+from uvf.reporters.json_reporter import JsonReporter
+from uvf.reporters.terminal_reporter import TerminalReporter
+from uvf.core.status import Teststatus
+from uvf.core.executor import TestExecutor
 
 class TestRunner:
 

@@ -1,4 +1,4 @@
-from reporters.base_reporter import BaseReporter
+from uvf.reporters.base_reporter import BaseReporter
 
 class TerminalReporter(BaseReporter):
     def generate(self, session):

@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from core.status import Teststatus
+from uvf.core.status import Teststatus
 
 @dataclass
 class TestResult:

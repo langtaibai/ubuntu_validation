@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 from typing import List
-from .test_result import TestResult
+from uvf.core.test_result import TestResult
 
 @dataclass
 class TestSession:

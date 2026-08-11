@@ -2,7 +2,7 @@ import json
 
 from rich.diagnose import report
 
-from reporters.base_reporter import BaseReporter
+from uvf.reporters.base_reporter import BaseReporter
 
 class JsonReporter(BaseReporter):
     def generate(self, session):

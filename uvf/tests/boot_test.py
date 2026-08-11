@@ -2,7 +2,7 @@
 #from config.config import load_config
 import time
 
-from core.status import Teststatus
+from uvf.core.status import Teststatus
 from uvf.tests.base import BaseTest
 from uvf.core.test_result import TestResult
 
